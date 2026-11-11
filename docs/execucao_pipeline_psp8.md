@@ -67,8 +67,8 @@ Os testes cobrem preservação do arquivo bruto, auditoria de domínios, manifes
 - [x] Auditoria de cada atributo revisada; domínio de `Stakeholder_Priority_Score` corrigido para 0–1.
 - [x] Perguntas P1–P4 desenvolvidas **a partir da prata relida** (notebook e módulo de análise) e catálogo, README e autoavaliação criados.
 - [ ] Reconfirmar a licença na página do dataset no Kaggle.
-- [ ] Executar `PSP8_Analise_P1_P4.ipynb` no Colab e conferir os gráficos.
-- [ ] Capturar e versionar evidências legíveis em `evidencias/` (pasta do Drive no navegador, saídas do Colab, gráficos).
-- [ ] Preencher o nome do aluno no README, definir a licença do código e conferir o repositório em janela anônima.
+- [x] `PSP8_Analise_P1_P4.ipynb` executado com sucesso no Colab (relato do autor).
+- [ ] Capturar e versionar evidências legíveis em `evidencias/` (pasta do Drive no navegador, saídas do Colab, gráficos reais): lista exata em [`evidencias/LEIAME.md`](../evidencias/LEIAME.md).
+- [ ] Definir a licença do código (`LICENSE`), conferir o repositório em janela anônima e postar o link no fórum da disciplina. (O nome do aluno já consta no README.)
 
 **Não mesclar esta branch na `main` antes da aprovação e validação das pendências.**

@@ -7,11 +7,11 @@ Sistema de Suporte à Decisão (SSD) para **triagem preliminar** de um cenário 
 | Disciplina | PSP8 — Departamento de Engenharia de Produção, Universidade de Brasília |
 | Professor | André Luiz Marques Serrano |
 | Trabalho | Individual · MVP: pipeline de dados em nuvem documentado em repositório público |
-| Aluno | _[preencher nome]_ |
+| Aluno | Ricardo Pimentel André |
 
 > **Aviso sobre o escopo dos dados.** A base usada reúne **projetos genéricos de infraestrutura (estradas, pontes, edifícios, usinas, obras hídricas)**. **Não é uma amostra específica de data centers.** Os resultados são comparações relativas a essa distribuição: **não são probabilidade de viabilidade, previsão de sucesso nem certificação financeira.** A decisão final permanece humana.
 
-**Estado da validação (leia antes dos resultados).** Está **comprovado no Google Colab** (executado pelo autor): coleta da versão 1, gravação de bronze e prata no Drive, Drive desmontado e remontado, 3.245 registros relidos, SHA-256 conferido e `Resultado: APROVADA`. Os números de P1–P4 abaixo foram calculados **localmente sobre o mesmo CSV (mesmo SHA-256)**; a execução do notebook de análise no Colab e as capturas de tela ainda estão **pendentes** (ver [Evidências](#10-evidências)).
+**Estado da validação (leia antes dos resultados).** O **pipeline e o notebook de análise P1–P4 foram executados com sucesso no Google Colab** (relato do autor): coleta da versão 1, gravação de bronze e prata no Drive, Drive desmontado e remontado, 3.245 registros relidos, SHA-256 conferido e `Resultado: APROVADA`. Os números de P1–P4 abaixo foram calculados e conferidos **localmente sobre o mesmo CSV (mesmo SHA-256)**. As **capturas de tela e os gráficos da execução no Colab ainda não estão anexados** em [`evidencias/`](evidencias/LEIAME.md) (ver [Evidências](#10-evidências)).
 
 ## Sumário
 1. [Objetivo, problema e perguntas](#1-objetivo-problema-e-perguntas) · 2. [Fonte, licença e coleta](#2-fonte-licença-e-coleta) · 3. [Plataforma e arquitetura](#3-plataforma-e-arquitetura) · 4. [Modelagem e catálogo](#4-modelagem-e-catálogo) · 5. [ETL e carga](#5-etl-e-carga) · 6. [Qualidade dos dados](#6-qualidade-dos-dados) · 7. [Resultados P1–P4](#7-resultados-p1p4) · 8. [Discussão geral e limitações](#8-discussão-geral-e-limitações) · 9. [Como reproduzir](#9-como-reproduzir) · 10. [Evidências](#10-evidências) · 11. [Autoavaliação](#11-autoavaliação) · 12. [Estrutura do repositório](#12-estrutura-do-repositório)
@@ -126,9 +126,9 @@ Notebook: [`notebooks/PSP8_Analise_P1_P4.ipynb`](notebooks/PSP8_Analise_P1_P4.ip
 |---|---|---|---|---|---|---|---|---|
 | Custo (US$) | 1.000.404 | 2.564.718 | 3.994.200 | 5.450.812 | 6.998.223 | 4.014.064 | 1.708.536 | 42,6 % |
 | Risco (0–100) | 30 | 47 | 64 | 82 | 99 | 64,6 | 20,2 | 31,3 % |
-| Prazo (dias) | 120 | 232 | 356 | 480 | 599 | 357,5 | 141,0 | 39,4 % |
+| Prazo (dias) | 120 | 232 | 356 | 480 | 599 | 357,5 | 141,0 | 39,5 % |
 
-**Observado:** as três distribuições são **simétricas e aproximadamente planas** (assimetria ≈ 0, média ≈ mediana), sem *outliers* por IQR; custo, risco e prazo são **independentes** na base (|r| ≤ 0,01); as médias das três dimensões são praticamente iguais entre os rótulos Feasible, Not Feasible e Borderline. **Interpretação (hipótese):** esse perfil é típico de dados gerados artificialmente; a fonte não documenta a origem. **Resposta:** custo, risco e prazo se espalham de forma ampla e simétrica, sem projetos atípicos e sem relação entre si; "alto" ou "baixo" tem significado puramente posicional.
+**Observado:** as três distribuições são **simétricas e aproximadamente planas** (assimetria ≈ 0, média ≈ mediana), sem *outliers* por IQR; **não há correlação linear relevante** entre custo, risco e prazo (|r| < 0,02); as médias das três dimensões são praticamente iguais entre os rótulos Feasible, Not Feasible e Borderline. **Interpretação (hipótese):** esse perfil é típico de dados gerados artificialmente; a fonte não documenta a origem. **Resposta:** custo, risco e prazo se espalham de forma ampla e simétrica, sem projetos atípicos e sem correlação linear relevante entre si; "alto" ou "baixo" tem significado puramente posicional.
 
 ### P2 — Posição do cenário (percentis)
 
@@ -144,9 +144,9 @@ Notebook: [`notebooks/PSP8_Analise_P1_P4.ipynb`](notebooks/PSP8_Analise_P1_P4.ip
 
 **Observado:** índice **74,4** (média de 75,7, 72,3 e 75,1) → faixa **Crítica**; cada dimensão contribui com cerca de um terço (33,9 % / 32,4 % / 33,7 %). Recomendações geradas (todas as dimensões ≥ 67): *revisar orçamento, fornecedores e criar reserva de contingência; elaborar plano formal de mitigação de riscos; dividir a implantação em etapas e acompanhar marcos críticos; não iniciar a implantação sem revisão do planejamento.*
 
-Aplicado aos próprios projetos históricos, o índice os distribui em **Favorável 15,3 % · Atenção 67,9 % · Crítica 16,7 %** (índice médio 50,3); o cenário tem índice maior que o de 92,2 % dos projetos.
+Aplicado aos próprios projetos históricos, o índice os distribui em **Favorável 15,3 % · Atenção 67,9 % · Crítica 16,7 %** (índice médio 50,3); o índice do cenário é maior ou igual ao de **92,3 %** dos projetos históricos (**7,7 %** têm índice maior).
 
-**Resultado negativo relevante.** O índice **não se relaciona com o `Feasibility_Label` da fonte**: índice médio 51,2 (Borderline), 50,2 (Feasible) e 49,9 (Not Feasible), e distribuição quase idêntica nas faixas (Crítica: 16,9 % / 17,3 % / 15,3 %). Isso não valida nem invalida o índice (o rótulo da fonte não é verdade de campo e sua geração não é documentada), mas mostra que, **nesta base, o índice não reproduz a classificação de viabilidade da fonte e não deve ser lido como previsão dela.**
+**Resultado negativo relevante.** **Não há associação descritiva relevante entre o índice e o `Feasibility_Label` da fonte**: índice médio 51,2 (Borderline), 50,2 (Feasible) e 49,9 (Not Feasible), e distribuição quase idêntica nas faixas (Crítica: 16,9 % / 17,3 % / 15,3 %). Isso não valida nem invalida o índice (o rótulo da fonte não é verdade de campo e sua geração não é documentada), mas mostra que, **nesta base, o índice não reproduz a classificação de viabilidade da fonte e não deve ser lido como previsão dela.**
 
 **Resposta:** exposição geral **74,4 (Crítica)**, com revisão recomendada de custo, risco e prazo; é uma **triagem heurística**, não uma previsão. Pesos iguais e cortes 33/67 são **premissas**: com outros valores a faixa pode mudar.
 
@@ -166,13 +166,13 @@ Cenários (hipotéticos e ilustrativos; índice e faixa):
 
 Variando **uma dimensão por vez** em −20 %: índice 68,2 (custo), 67,0 (risco; 66,985 → Atenção, faixa decidida sem arredondar) e 67,9 (prazo): queda de 6,2 a 7,4 pontos. **Pontos de virada** (maior valor que mantém o índice < 67, com as demais fixas): custo ≈ US$ 4,22 mi (−23,2 %), risco 64 (−20,0 %), prazo 370 dias (−22,9 %). **Nenhuma redução isolada leva a Favorável** (< 33; o mínimo alcançável é ≈ 49–51). Medindo em desvios-padrão (comparável entre dimensões), ±1 desvio move o índice de 64,6–64,9 a 82,5–83,6 nas três dimensões: **nenhuma domina**. Varrendo cada dimensão pela faixa observada, a curva é praticamente linear (r ≥ 0,9998).
 
-**Interpretação:** com pesos iguais e dimensões independentes e planas, o índice reage de modo aproximadamente simétrico; ele **não indica qual alavanca priorizar** (isso depende do custo de agir em cada dimensão, informação que a base não traz). **Resposta:** reduções isoladas de ~20 % aproximam o cenário da fronteira Crítica/Atenção sem torná-lo Favorável; combinar reduções nas três dimensões leva a Atenção com folga. A análise é determinística (sem incerteza estatística), os cenários são escolhas nossas e pesos diferentes mudariam as conclusões.
+**Interpretação:** com pesos iguais e dimensões sem correlação linear relevante e de distribuição plana, o índice reage de modo aproximadamente simétrico; ele **não indica qual alavanca priorizar** (isso depende do custo de agir em cada dimensão, informação que a base não traz). **Resposta:** reduções isoladas de ~20 % aproximam o cenário da fronteira Crítica/Atenção sem torná-lo Favorável; combinar reduções nas três dimensões leva a Atenção com folga. A análise é determinística (sem incerteza estatística), os cenários são escolhas nossas e pesos diferentes mudariam as conclusões.
 
 ## 8. Discussão geral e limitações
 
 **Solução do problema.** Em relação ao histórico da base, o cenário é **alto nas três dimensões** (percentis 72–76; índice 74,4, Crítica); a triagem sugere revisar custo, risco e prazo antes do planejamento detalhado e mostra que reduções isoladas de ~20 % não bastam para torná-lo favorável. **Hipótese:** parcialmente sustentada — o índice distingue cenários e muda de faixa com variações relevantes (não foi refutada pelo critério da seção 1), mas **não reproduz o rótulo de viabilidade da fonte** e **não indica por si só onde agir**.
 
-**Limitações dos dados.** Projetos genéricos (não data centers); procedência não documentada e indícios de dado sintético (distribuições planas, dimensões independentes) — hipótese; sem dimensão temporal; sem dicionário de dados (sentido do risco, escalas dos escores e unidade do custo são premissas); `Feasibility_Label` sem critério documentado.
+**Limitações dos dados.** Projetos genéricos (não data centers); procedência não documentada e indícios de dado sintético (distribuições planas, ausência de correlação linear relevante entre as dimensões) — hipótese; sem dimensão temporal; sem dicionário de dados (sentido do risco, escalas dos escores e unidade do custo são premissas); `Feasibility_Label` sem critério documentado.
 
 **Limitações do método.** Percentil é posição relativa, não probabilidade; pesos iguais e cortes 33/67 são heurísticas não validadas; cenários e variações de P4 são ilustrativos; a análise é determinística e não quantifica incerteza; não há ML.
 
@@ -192,21 +192,23 @@ python -m unittest discover -s tests -v
 
 ## 10. Evidências
 
-Os arquivos JSON abaixo são gerados pelo código; **capturas de tela legíveis** devem ser salvas em [`evidencias/`](evidencias/LEIAME.md) e referenciadas aqui.
+Os arquivos JSON (manifesto, auditoria e verificação) são gerados pelo código e ficam no Drive em `execucoes/<id>/evidencias/`. **Nenhuma imagem de evidência foi simulada**: as capturas da execução real no Colab e no Drive devem ser salvas em [`evidencias/`](evidencias/LEIAME.md), que traz a lista exata, os nomes de arquivo e o trecho do README a ativar em cada caso.
 
 | Evidência | Situação |
 |---|---|
-| Manifesto e auditoria da primeira execução no Colab (`20261111T004425Z_bc476d5a`): 3.245 registros, hashes iguais, releitura aprovada | Conferidos pelo autor do repositório; **captura a anexar** |
-| Drive desmontado e remontado, `Resultado: APROVADA` (execução posterior às correções) | Confirmado pelo autor; **captura a anexar** |
-| Pasta `execucoes/<id>/` no navegador, com `bronze/`, `prata/`, `evidencias/` e `analises/` | **Pendente** |
-| Saídas e gráficos do notebook de análise P1–P4 no Colab | **Pendente** |
-| Repositório aberto em janela anônima (visibilidade pública) | **Pendente** |
+| Pipeline executado no Colab: 3.245 registros relidos, SHA-256 de fonte, bronze e prata iguais a `a93b9f10…`, `Resultado: APROVADA` | **Executado e confirmado pelo autor.** Manifesto e auditoria da primeira execução (`20261111T004425Z_bc476d5a`) conferidos nos JSONs; **captura da interface: pendente** |
+| Drive desmontado e remontado antes da releitura | **Executado e confirmado pelo autor;** captura da célula: pendente |
+| Notebook de análise P1–P4 executado no Colab | **Executado com sucesso (relato do autor);** gráficos e saídas ainda **não anexados** |
+| Pasta `execucoes/<id>/` no Drive, com `bronze/`, `prata/`, `evidencias/` e `analises/` | **Pendente** (captura no navegador) |
+| Repositório aberto em janela anônima | **Pendente** (o repositório responde como público na API do GitHub) |
+
+**Pendências efetivas:** (1) anexar as capturas e os gráficos listados em [`evidencias/LEIAME.md`](evidencias/LEIAME.md); (2) reconfirmar a licença CC0 na página do dataset; (3) decidir a licença do código (`LICENSE`); (4) conferir o repositório em janela anônima e postar o link no fórum da disciplina.
 
 ## 11. Autoavaliação
 
-**Quais perguntas foram respondidas e quais não foram? Por quê?** As quatro foram **respondidas tecnicamente** (P1–P4, seção 7), com as ressalvas de que as respostas são **descritivas e heurísticas**: P2 e P3 posicionam o cenário em relação ao histórico, mas **não** estimam probabilidade de viabilidade; P4 mostra a sensibilidade do índice, mas **não** indica qual alavanca priorizar. A hipótese foi apenas **parcialmente sustentada**: o índice distingue cenários, mas não reproduz o rótulo de viabilidade da base. Os resultados P1–P4 ainda precisam ser reproduzidos no Colab e anexados como captura.
+**Quais perguntas foram respondidas e quais não foram? Por quê?** As quatro foram **respondidas tecnicamente** (P1–P4, seção 7), com as ressalvas de que as respostas são **descritivas e heurísticas**: P2 e P3 posicionam o cenário em relação ao histórico, mas **não** estimam probabilidade de viabilidade; P4 mostra a sensibilidade do índice, mas **não** indica qual alavanca priorizar. A hipótese foi apenas **parcialmente sustentada**: o índice distingue cenários, mas não reproduz o rótulo de viabilidade da base. O pipeline e o notebook P1–P4 foram executados no Colab; as capturas da execução ainda precisam ser anexadas ao repositório.
 
-**Que limitações dos dados condicionaram os resultados?** Projetos genéricos de infraestrutura (não data centers); procedência não documentada e indícios de dado sintético (distribuições planas e dimensões independentes), o que torna o índice quase simétrico; ausência de dicionário de dados (sentido do risco, escalas e unidades são premissas); rótulo de viabilidade sem critério documentado; ausência de dimensão temporal.
+**Que limitações dos dados condicionaram os resultados?** Projetos genéricos de infraestrutura (não data centers); procedência não documentada e indícios de dado sintético (distribuições planas e ausência de correlação linear relevante entre as dimensões), o que torna o índice quase simétrico; ausência de dicionário de dados (sentido do risco, escalas e unidades são premissas); rótulo de viabilidade sem critério documentado; ausência de dimensão temporal.
 
 **Que decisões técnicas eu tomaria de outra forma?** (i) Definir o problema e as perguntas **antes** de escolher a base — o enunciado alerta para esse erro e aqui a base e o protótipo vieram primeiro; (ii) escolher uma base **específica de data centers**, com procedência documentada; (iii) confrontar o pipeline com os **dados reais desde o início** (a escala de `Stakeholder_Priority_Score` foi assumida como 0–100 e só corrigida na auditoria); (iv) fixar a versão da fonte e o *hash* desde a primeira execução; (v) provar a persistência no Drive por remontagem e captura de tela já na primeira carga; (vi) avaliar o Databricks, plataforma com apoio da disciplina.
 
@@ -226,7 +228,7 @@ Os arquivos JSON abaixo são gerados pelo código; **capturas de tela legíveis*
 | `tests/` | Testes automatizados (dados sintéticos com linhas reais; testes opcionais com o CSV real) |
 | `catalogo/catalogo_dados.md` | Catálogo de dados, modelo e linhagem |
 | `docs/` | Planejamento aprovado e instruções de execução da Etapa 2 (parcialmente desatualizadas em relação a este README) |
-| `evidencias/` | Local das capturas de tela (a preencher) |
+| `evidencias/` | Capturas de tela e gráficos da execução no Colab/Drive ([lista do que falta](evidencias/LEIAME.md)) |
 | `.gitignore` | Exclui dados, credenciais, ambientes virtuais e arquivos locais |
 
 **Licença.** Dados: CC0 (fonte). **Licença do código: ainda não definida** — o arquivo `LICENSE` pedido no enunciado está pendente de escolha do autor.
