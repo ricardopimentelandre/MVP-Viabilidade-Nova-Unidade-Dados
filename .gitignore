@@ -1,0 +1,28 @@
+# Ambientes virtuais e caches de Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Credenciais e segredos (nunca versionar)
+.env
+.env.*
+kaggle.json
+*credentials*.json
+*token*.json
+client_secret*.json
+
+# Arquivos locais de referência (enunciado, ZIPs de evidência baixados do Drive)
+referencias/
+
+# Dados: o CSV da fonte não é versionado (a base é obtida pelo script de coleta)
+*.csv
+execucoes/
+
+# Sistema e editores
+.DS_Store
+.idea/
+.vscode/
