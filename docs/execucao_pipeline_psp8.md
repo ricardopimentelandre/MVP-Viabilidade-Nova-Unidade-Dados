@@ -13,7 +13,7 @@ O notebook inicial [`MVP_Viabilidade_Nova_Unidade_Dados.ipynb`](../MVP_Viabilida
 ## Execução no Google Colab
 
 1. Abra o arquivo `notebooks/PSP8_Pipeline_Bronze_Prata_Colab.ipynb` no Colab.
-2. Use **Executar tudo**: instala `kagglehub` e `pandas`, monta o Drive (autorize **seu próprio Drive**) e baixa o script versionado da branch de trabalho.
+2. Use **Executar tudo**: instala `kagglehub` e `pandas`, monta o Drive (autorize **seu próprio Drive**) e baixa o script de um commit fixo do GitHub (`8b90917`).
 3. `executar_pipeline` baixa a **versão 1** do Kaggle e cria a pasta de execução no Google Drive.
 4. O notebook **desmonta (com *flush*) e remonta o Drive** (autorize novamente) e `verificar_persistencia` relê os arquivos, recalcula SHA-256, tamanhos e contagens, refaz a auditoria e compara com o manifesto; a célula falha se algo divergir (`Resultado: APROVADA` se tudo conferir).
 5. Execute as células de resumo (manifesto, hashes, tabela prata relida).
@@ -72,4 +72,4 @@ Os testes cobrem preservação do arquivo bruto, auditoria de domínios, manifes
 - [x] Licença do código definida (`LICENSE`, MIT).
 - [x] Repositório público conferido em janela anônima (relato do autor). [ ] Postar o link no fórum da disciplina. (O nome do aluno já consta no README.)
 
-**Não mesclar esta branch na `main` antes da aprovação e validação das pendências.**
+**Entrega final:** a branch `psp8-etapa-2-pipeline` foi mesclada na `main` após a validação; os notebooks usam o commit fixo `8b90917` para baixar os scripts.

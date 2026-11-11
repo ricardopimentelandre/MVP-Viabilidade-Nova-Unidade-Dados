@@ -195,10 +195,10 @@ Variando **uma dimensão por vez** em −20 %: índice 68,2 (custo), 67,0 (risco
 ## 9. Como reproduzir
 
 **Na nuvem (Google Colab + Drive do próprio usuário):**
-1. Abra `notebooks/PSP8_Pipeline_Bronze_Prata_Colab.ipynb` ([abrir no Colab](https://colab.research.google.com/github/ricardopimentelandre/MVP-Viabilidade-Nova-Unidade-Dados/blob/psp8-etapa-2-pipeline/notebooks/PSP8_Pipeline_Bronze_Prata_Colab.ipynb)) e use **Executar tudo**. Autorize o Drive (duas vezes: montagem inicial e remontagem). Resultado esperado: `Resultado: APROVADA` e uma nova pasta em `MyDrive/UnB/PSP8/MVP_Viabilidade_Nova_Unidade/execucoes/<id>/`.
-2. Abra `notebooks/PSP8_Analise_P1_P4.ipynb` ([abrir no Colab](https://colab.research.google.com/github/ricardopimentelandre/MVP-Viabilidade-Nova-Unidade-Dados/blob/psp8-etapa-2-pipeline/notebooks/PSP8_Analise_P1_P4.ipynb)) e use **Executar tudo**. Ele usa a execução verificada mais recente e grava `analises/` na mesma pasta.
+1. Abra `notebooks/PSP8_Pipeline_Bronze_Prata_Colab.ipynb` ([abrir no Colab](https://colab.research.google.com/github/ricardopimentelandre/MVP-Viabilidade-Nova-Unidade-Dados/blob/main/notebooks/PSP8_Pipeline_Bronze_Prata_Colab.ipynb)) e use **Executar tudo**. Autorize o Drive (duas vezes: montagem inicial e remontagem). Resultado esperado: `Resultado: APROVADA` e uma nova pasta em `MyDrive/UnB/PSP8/MVP_Viabilidade_Nova_Unidade/execucoes/<id>/`.
+2. Abra `notebooks/PSP8_Analise_P1_P4.ipynb` ([abrir no Colab](https://colab.research.google.com/github/ricardopimentelandre/MVP-Viabilidade-Nova-Unidade-Dados/blob/main/notebooks/PSP8_Analise_P1_P4.ipynb)) e use **Executar tudo**. Ele usa a execução verificada mais recente e grava `analises/` na mesma pasta.
 
-Os notebooks baixam os scripts da branch `psp8-etapa-2-pipeline`; para uma entrega final, fixe a URL em um commit validado.
+Os notebooks baixam os scripts de um **commit fixo** (`8b90917`, o mesmo código desta versão), de modo que a execução continua reprodutível mesmo que o repositório receba novas alterações.
 
 **Testes locais** (não substituem a execução no Drive): com Python 3.10+ e `pandas`,
 ```bash
