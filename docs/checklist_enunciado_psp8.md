@@ -12,10 +12,10 @@ Situação em 11/11/2026. **Atendido** = comprovado no repositório; **Atendido,
 | 4 | Modelo descrito e Catálogo com domínios e linhagem | **Atendido** (13 atributos, tipo, descrição, domínio, obrigatoriedade, linhagem, diagramas) | `catalogo/catalogo_dados.md` |
 | 5 | Transformação e carga documentadas, com regras de negócio explícitas | **Atendido** (nenhuma transformação de conteúdo, declarada; prata idêntica à bronze) | README §5; manifesto `transformacoes_prata` |
 | 6 | Análise de qualidade cobre todos os atributos | **Atendido** (13 atributos × completude, unicidade, conformidade, consistência, acurácia, atualidade) | README §6; `auditoria_qualidade.json` |
-| 7 | Cada pergunta com resposta, evidência e discussão | **Atendido, falta evidência**: P1–P4 respondidas no README e no notebook (executado no Colab); **faltam os gráficos reais anexados** | README §7; `notebooks/PSP8_Analise_P1_P4.ipynb`; `evidencias/LEIAME.md` (item C) |
+| 7 | Cada pergunta com resposta, evidência e discussão | **Atendido**: P1–P4 respondidas no README e no notebook; **7 gráficos reais do Colab anexados** em `evidencias/graficos/` e referenciados na seção 7 | README §7; `notebooks/PSP8_Analise_P1_P4.ipynb`; `evidencias/graficos/` |
 | 8 | Discussão geral conectando as respostas ao problema | **Atendido** | README §8; notebook (discussão geral) |
 | 9 | Autoavaliação com as 4 questões sugeridas (§6) | **Atendido** | README §11 |
-| 10 | Evidências (capturas e vídeos) legíveis e referenciadas | **Pendente**: nenhuma imagem anexada; lista exata em `evidencias/LEIAME.md` | `evidencias/` |
+| 10 | Evidências (capturas e vídeos) legíveis e referenciadas | **Parcial**: gráficos de P1–P4 anexados e referenciados; **faltam 8 capturas de tela da interface do Colab e do Drive** (lista exata em `evidencias/LEIAME.md`) | `evidencias/` |
 | 11 | Repositório público, link conferido em janela anônima | **Parcial**: a API do GitHub responde `private: false`; **falta a conferência em janela anônima** | — |
 
 ## Demais requisitos do enunciado
@@ -31,7 +31,7 @@ Situação em 11/11/2026. **Atendido** = comprovado no repositório; **Atendido,
 | §3.5b | Resposta e discussão por pergunta; resultados negativos relatados | **Atendido** (resultado negativo de P3 destacado) |
 | §4 | Licença, uso derivado, não versionar dados se necessário, LGPD | **Atendido**: CC0, dados não versionados, sem dados pessoais. A licença deve ser reconfirmada na página |
 | §5.1 | `README.md`, `/notebooks`, `/scripts`, `/catalogo`, `/evidencias` | **Atendido** (a pasta `/evidencias` ainda sem imagens) |
-| §5.1 | `LICENSE` (licença do código e registro da licença dos dados) | **Pendente**: arquivo não criado por decisão do autor; a licença CC0 dos dados está registrada no README e no catálogo |
+| §5.1 | `LICENSE` (licença do código e registro da licença dos dados) | **Atendido**: MIT para o código (© 2026 Ricardo Pimentel André) e registro da licença CC0 dos dados |
 | §5.3 | Postagem do link no fórum da disciplina | **Pendente** (ação do autor) |
 
 ## Rubrica (§7)
@@ -42,6 +42,6 @@ Situação em 11/11/2026. **Atendido** = comprovado no repositório; **Atendido,
 | Coleta | 0,5 | Completo (reconfirmar licença na página) |
 | Modelagem (modelo + catálogo) | 2,0 | Completo |
 | Carga | 1,0 | Completa no código e no Colab; **evidência visual da persistência pendente** |
-| Análise (qualidade, solução, discussão) | 3,0 | Completa; **gráficos reais anexados pendentes** |
+| Análise (qualidade, solução, discussão) | 3,0 | Completa, com gráficos reais anexados |
 | Autoavaliação | 0,5 | Completa |
-| Capricho | 2,0 | README e repositório organizados; **capturas e `LICENSE`** ajudam a pontuação |
+| Capricho | 2,0 | README e repositório organizados, gráficos anexados; **capturas de tela** ajudam a pontuação |

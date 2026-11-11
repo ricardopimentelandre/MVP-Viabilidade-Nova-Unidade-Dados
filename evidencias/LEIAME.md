@@ -2,9 +2,23 @@
 
 Esta pasta guarda as **capturas de tela e os gráficos reais** que comprovam a execução no Google Colab e a persistência no Google Drive (enunciado §5.2). As imagens devem estar **legíveis** e ser **referenciadas no README**, no ponto que sustentam.
 
-**Situação em 11/11/2026: nenhuma imagem foi anexada ainda.** O pipeline e o notebook de análise P1–P4 foram executados com sucesso no Colab (relato do autor), mas as capturas e os gráficos dessa execução não estavam acessíveis ao assistente. **Nada aqui foi simulado**: não há imagens geradas fora do Colab/Drive passando por evidência.
+**Situação em 11/11/2026:** os **7 gráficos reais do notebook P1–P4** (saídas do Colab, baixadas do Drive) estão em [`graficos/`](graficos/) e já aparecem no README (seção 7). **Ainda faltam as 8 capturas de tela da interface** (4 do Colab e 4 do navegador), listadas abaixo. Nada aqui foi simulado: não há imagens geradas fora do Colab/Drive passando por evidência.
 
-## O que falta fornecer
+## Já anexado
+
+| Arquivo (`graficos/`) | Mostra | README |
+|---|---|---|
+| `p1_histogramas.png` | P1: distribuições de custo, risco e prazo | §7, P1 |
+| `p2_percentis_do_cenario.png` | P2: posição do cenário (percentis 75,7 / 72,3 / 75,1) | §7, P2 |
+| `p3_indice_do_cenario.png` | P3: índice 74,4 e faixa Crítica | §7, P3 |
+| `p3_indice_historico.png` | P3: índice dos projetos históricos × cenário | §7, P3 |
+| `p4_comparacao_de_cenarios.png` | P4: índice por cenário | §7, P4 |
+| `p4_sensibilidade_percentual.png` | P4: uma dimensão por vez | §7, P4 |
+| `p4_curvas_por_dimensao.png` | P4: índice × valor de cada dimensão | §7, P4 |
+
+Observação sobre `p3_indice_do_cenario.png`: a legenda cobre o rótulo "74,4" da barra "Índice geral" (o valor consta no título do gráfico e no README). É um detalhe visual do notebook, mantido sem alteração para que a imagem corresponda ao código executado.
+
+## O que ainda falta fornecer (8 capturas de tela)
 
 **A. Capturas da interface do Colab** (tirar da execução já feita, sem reexecutar; se a sessão expirou, reexecute e capture)
 
@@ -24,24 +38,10 @@ Esta pasta guarda as **capturas de tela e os gráficos reais** que comprovam a e
 | `07_drive_analises.png` | pasta `analises/` com os PNGs e CSVs de P1–P4 |
 | `08_repositorio_janela_anonima.png` | o repositório do GitHub aberto em janela anônima |
 
-**C. Gráficos reais do notebook P1–P4** (baixe do Drive, de `execucoes/<id>/analises/`, para `evidencias/graficos/`, mantendo os nomes)
-
-`p1_histogramas.png` · `p2_percentis_do_cenario.png` · `p3_indice_do_cenario.png` · `p3_indice_historico.png` · `p4_comparacao_de_cenarios.png` · `p4_sensibilidade_percentual.png` · `p4_curvas_por_dimensao.png`
-
-**D. Opcional:** os três JSONs da execução final, em `evidencias/json/`.
+**C. Opcional:** os três JSONs da execução final, em `evidencias/json/`.
 
 Não publique credenciais, tokens, e-mails nem dados privados nas capturas.
 
-## Como referenciar no README depois de salvar os arquivos
+## Como referenciar as capturas no README
 
-Cole no README, na seção 7 (Resultados P1–P4), apenas as linhas dos arquivos que existirem:
-
-```markdown
-![P1 – distribuições históricas](evidencias/graficos/p1_histogramas.png)
-![P2 – posição do cenário](evidencias/graficos/p2_percentis_do_cenario.png)
-![P3 – índice do cenário](evidencias/graficos/p3_indice_do_cenario.png)
-![P4 – comparação de cenários](evidencias/graficos/p4_comparacao_de_cenarios.png)
-![P4 – sensibilidade](evidencias/graficos/p4_sensibilidade_percentual.png)
-```
-
-E, na seção 10, troque "pendente" por o nome do arquivo correspondente (por exemplo, `evidencias/05_drive_pasta_execucao.png`).
+Depois de salvar os arquivos nesta pasta, na seção 10 do README troque "pendente" pelo nome do arquivo correspondente (por exemplo, `evidencias/05_drive_pasta_execucao.png`) e, se quiser, embuta a imagem com `![descrição](evidencias/05_drive_pasta_execucao.png)`.

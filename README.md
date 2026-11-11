@@ -11,7 +11,7 @@ Sistema de Suporte à Decisão (SSD) para **triagem preliminar** de um cenário 
 
 > **Aviso sobre o escopo dos dados.** A base usada reúne **projetos genéricos de infraestrutura (estradas, pontes, edifícios, usinas, obras hídricas)**. **Não é uma amostra específica de data centers.** Os resultados são comparações relativas a essa distribuição: **não são probabilidade de viabilidade, previsão de sucesso nem certificação financeira.** A decisão final permanece humana.
 
-**Estado da validação (leia antes dos resultados).** O **pipeline e o notebook de análise P1–P4 foram executados com sucesso no Google Colab** (relato do autor): coleta da versão 1, gravação de bronze e prata no Drive, Drive desmontado e remontado, 3.245 registros relidos, SHA-256 conferido e `Resultado: APROVADA`. Os números de P1–P4 abaixo foram calculados e conferidos **localmente sobre o mesmo CSV (mesmo SHA-256)**. As **capturas de tela e os gráficos da execução no Colab ainda não estão anexados** em [`evidencias/`](evidencias/LEIAME.md) (ver [Evidências](#10-evidências)).
+**Estado da validação (leia antes dos resultados).** O **pipeline e o notebook de análise P1–P4 foram executados com sucesso no Google Colab** (relato do autor): coleta da versão 1, gravação de bronze e prata no Drive, Drive desmontado e remontado, 3.245 registros relidos, SHA-256 conferido e `Resultado: APROVADA`. Os números de P1–P4 abaixo foram calculados e conferidos **localmente sobre o mesmo CSV (mesmo SHA-256)**. Os **7 gráficos gerados pelo notebook no Colab estão anexados** em [`evidencias/graficos/`](evidencias/graficos/) e exibidos na seção 7; as **capturas de tela da interface do Colab e do Drive ainda não estão anexadas** (ver [Evidências](#10-evidências)).
 
 ## Sumário
 1. [Objetivo, problema e perguntas](#1-objetivo-problema-e-perguntas) · 2. [Fonte, licença e coleta](#2-fonte-licença-e-coleta) · 3. [Plataforma e arquitetura](#3-plataforma-e-arquitetura) · 4. [Modelagem e catálogo](#4-modelagem-e-catálogo) · 5. [ETL e carga](#5-etl-e-carga) · 6. [Qualidade dos dados](#6-qualidade-dos-dados) · 7. [Resultados P1–P4](#7-resultados-p1p4) · 8. [Discussão geral e limitações](#8-discussão-geral-e-limitações) · 9. [Como reproduzir](#9-como-reproduzir) · 10. [Evidências](#10-evidências) · 11. [Autoavaliação](#11-autoavaliação) · 12. [Estrutura do repositório](#12-estrutura-do-repositório)
@@ -120,6 +120,8 @@ Auditoria por atributo ([`auditar_prata`](scripts/pipeline_etl_drive.py)): **com
 
 Notebook: [`notebooks/PSP8_Analise_P1_P4.ipynb`](notebooks/PSP8_Analise_P1_P4.ipynb). Lê a **prata do Drive** (conferindo o SHA-256 contra o manifesto), gera as tabelas e gráficos e grava tudo em `execucoes/<id>/analises/`. Lógica em [`scripts/analise_ssd.py`](scripts/analise_ssd.py), com testes. **Cenário demonstrado (hipotético, do protótipo original):** custo US$ 5.500.000, risco 80/100, prazo 480 dias. Separamos o que é **resultado observado** do que é **interpretação** e do que é **premissa**.
 
+*Figuras desta seção: saídas reais do notebook `PSP8_Analise_P1_P4` executado no Colab, baixadas de `execucoes/<id>/analises/` no Drive.*
+
 ### P1 — Comportamento histórico
 
 | | Mín | Q1 | Mediana | Q3 | Máx | Média | Desvio | CV |
@@ -129,6 +131,8 @@ Notebook: [`notebooks/PSP8_Analise_P1_P4.ipynb`](notebooks/PSP8_Analise_P1_P4.ip
 | Prazo (dias) | 120 | 232 | 356 | 480 | 599 | 357,5 | 141,0 | 39,5 % |
 
 **Observado:** as três distribuições são **simétricas e aproximadamente planas** (assimetria ≈ 0, média ≈ mediana), sem *outliers* por IQR; **não há correlação linear relevante** entre custo, risco e prazo (|r| < 0,02); as médias das três dimensões são praticamente iguais entre os rótulos Feasible, Not Feasible e Borderline. **Interpretação (hipótese):** esse perfil é típico de dados gerados artificialmente; a fonte não documenta a origem. **Resposta:** custo, risco e prazo se espalham de forma ampla e simétrica, sem projetos atípicos e sem correlação linear relevante entre si; "alto" ou "baixo" tem significado puramente posicional.
+
+![P1 — distribuição histórica de custo, risco e prazo](evidencias/graficos/p1_histogramas.png)
 
 ### P2 — Posição do cenário (percentis)
 
@@ -140,6 +144,8 @@ Notebook: [`notebooks/PSP8_Analise_P1_P4.ipynb`](notebooks/PSP8_Analise_P1_P4.ip
 
 **Resposta:** o cenário está **bem acima da mediana nas três dimensões**, perto do terceiro quartil (percentis 72–76), de forma equilibrada. *Cuidado:* o percentil é **posição relativa** na amostra; não é a probabilidade de o cenário ser viável ou inviável, e um percentil alto de custo ou prazo não implica, por si só, inviabilidade.
 
+![P2 — posição do cenário na distribuição acumulada](evidencias/graficos/p2_percentis_do_cenario.png)
+
 ### P3 — Índice de exposição e recomendações
 
 **Observado:** índice **74,4** (média de 75,7, 72,3 e 75,1) → faixa **Crítica**; cada dimensão contribui com cerca de um terço (33,9 % / 32,4 % / 33,7 %). Recomendações geradas (todas as dimensões ≥ 67): *revisar orçamento, fornecedores e criar reserva de contingência; elaborar plano formal de mitigação de riscos; dividir a implantação em etapas e acompanhar marcos críticos; não iniciar a implantação sem revisão do planejamento.*
@@ -149,6 +155,10 @@ Aplicado aos próprios projetos históricos, o índice os distribui em **Favorá
 **Resultado negativo relevante.** **Não há associação descritiva relevante entre o índice e o `Feasibility_Label` da fonte**: índice médio 51,2 (Borderline), 50,2 (Feasible) e 49,9 (Not Feasible), e distribuição quase idêntica nas faixas (Crítica: 16,9 % / 17,3 % / 15,3 %). Isso não valida nem invalida o índice (o rótulo da fonte não é verdade de campo e sua geração não é documentada), mas mostra que, **nesta base, o índice não reproduz a classificação de viabilidade da fonte e não deve ser lido como previsão dela.**
 
 **Resposta:** exposição geral **74,4 (Crítica)**, com revisão recomendada de custo, risco e prazo; é uma **triagem heurística**, não uma previsão. Pesos iguais e cortes 33/67 são **premissas**: com outros valores a faixa pode mudar.
+
+![P3 — índice de exposição do cenário](evidencias/graficos/p3_indice_do_cenario.png)
+
+![P3 — índice dos projetos históricos e posição do cenário](evidencias/graficos/p3_indice_historico.png)
 
 ### P4 — Sensibilidade
 
@@ -167,6 +177,12 @@ Cenários (hipotéticos e ilustrativos; índice e faixa):
 Variando **uma dimensão por vez** em −20 %: índice 68,2 (custo), 67,0 (risco; 66,985 → Atenção, faixa decidida sem arredondar) e 67,9 (prazo): queda de 6,2 a 7,4 pontos. **Pontos de virada** (maior valor que mantém o índice < 67, com as demais fixas): custo ≈ US$ 4,22 mi (−23,2 %), risco 64 (−20,0 %), prazo 370 dias (−22,9 %). **Nenhuma redução isolada leva a Favorável** (< 33; o mínimo alcançável é ≈ 49–51). Medindo em desvios-padrão (comparável entre dimensões), ±1 desvio move o índice de 64,6–64,9 a 82,5–83,6 nas três dimensões: **nenhuma domina**. Varrendo cada dimensão pela faixa observada, a curva é praticamente linear (r ≥ 0,9998).
 
 **Interpretação:** com pesos iguais e dimensões sem correlação linear relevante e de distribuição plana, o índice reage de modo aproximadamente simétrico; ele **não indica qual alavanca priorizar** (isso depende do custo de agir em cada dimensão, informação que a base não traz). **Resposta:** reduções isoladas de ~20 % aproximam o cenário da fronteira Crítica/Atenção sem torná-lo Favorável; combinar reduções nas três dimensões leva a Atenção com folga. A análise é determinística (sem incerteza estatística), os cenários são escolhas nossas e pesos diferentes mudariam as conclusões.
+
+![P4 — índice por cenário](evidencias/graficos/p4_comparacao_de_cenarios.png)
+
+![P4 — sensibilidade: uma dimensão por vez](evidencias/graficos/p4_sensibilidade_percentual.png)
+
+![P4 — índice × valor de cada dimensão](evidencias/graficos/p4_curvas_por_dimensao.png)
 
 ## 8. Discussão geral e limitações
 
@@ -192,17 +208,17 @@ python -m unittest discover -s tests -v
 
 ## 10. Evidências
 
-Os arquivos JSON (manifesto, auditoria e verificação) são gerados pelo código e ficam no Drive em `execucoes/<id>/evidencias/`. **Nenhuma imagem de evidência foi simulada**: as capturas da execução real no Colab e no Drive devem ser salvas em [`evidencias/`](evidencias/LEIAME.md), que traz a lista exata, os nomes de arquivo e o trecho do README a ativar em cada caso.
+Os arquivos JSON (manifesto, auditoria e verificação) são gerados pelo código e ficam no Drive em `execucoes/<id>/evidencias/`. **Nenhuma imagem de evidência foi simulada.** Os gráficos de P1–P4 são saídas reais do Colab, em [`evidencias/graficos/`](evidencias/graficos/); os resultados numéricos (CSVs do mesmo `analises/`) foram conferidos e coincidem com o cálculo independente, com diferença relativa máxima de ~1e-14. As capturas da interface do Colab e do Drive ainda devem ser salvas em [`evidencias/`](evidencias/LEIAME.md), que traz a lista exata e os nomes de arquivo.
 
 | Evidência | Situação |
 |---|---|
 | Pipeline executado no Colab: 3.245 registros relidos, SHA-256 de fonte, bronze e prata iguais a `a93b9f10…`, `Resultado: APROVADA` | **Executado e confirmado pelo autor.** Manifesto e auditoria da primeira execução (`20261111T004425Z_bc476d5a`) conferidos nos JSONs; **captura da interface: pendente** |
 | Drive desmontado e remontado antes da releitura | **Executado e confirmado pelo autor;** captura da célula: pendente |
-| Notebook de análise P1–P4 executado no Colab | **Executado com sucesso (relato do autor);** gráficos e saídas ainda **não anexados** |
+| Notebook de análise P1–P4 executado no Colab | **Executado.** Gráficos reais anexados em `evidencias/graficos/` (7 arquivos, seção 7); **captura da interface com a carga da prata: pendente** |
 | Pasta `execucoes/<id>/` no Drive, com `bronze/`, `prata/`, `evidencias/` e `analises/` | **Pendente** (captura no navegador) |
 | Repositório aberto em janela anônima | **Pendente** (o repositório responde como público na API do GitHub) |
 
-**Pendências efetivas:** (1) anexar as capturas e os gráficos listados em [`evidencias/LEIAME.md`](evidencias/LEIAME.md); (2) reconfirmar a licença CC0 na página do dataset; (3) decidir a licença do código (`LICENSE`); (4) conferir o repositório em janela anônima e postar o link no fórum da disciplina.
+**Pendências efetivas:** (1) anexar as 8 capturas de tela listadas em [`evidencias/LEIAME.md`](evidencias/LEIAME.md) (4 do Colab e 4 do navegador); (2) reconfirmar a licença CC0 na página do dataset; (3) conferir o repositório em janela anônima e postar o link no fórum da disciplina.
 
 ## 11. Autoavaliação
 
@@ -231,4 +247,4 @@ Os arquivos JSON (manifesto, auditoria e verificação) são gerados pelo códig
 | `evidencias/` | Capturas de tela e gráficos da execução no Colab/Drive ([lista do que falta](evidencias/LEIAME.md)) |
 | `.gitignore` | Exclui dados, credenciais, ambientes virtuais e arquivos locais |
 
-**Licença.** Dados: CC0 (fonte). **Licença do código: ainda não definida** — o arquivo `LICENSE` pedido no enunciado está pendente de escolha do autor.
+**Licença.** Código: **MIT** (© 2026 Ricardo Pimentel André), em [`LICENSE`](LICENSE). Dados: **CC0** (Kaggle, versão 1); os dados não fazem parte do repositório e não são cobertos pela licença MIT.

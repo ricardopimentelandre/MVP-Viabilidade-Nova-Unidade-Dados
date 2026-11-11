@@ -69,6 +69,7 @@ Os testes cobrem preservação do arquivo bruto, auditoria de domínios, manifes
 - [ ] Reconfirmar a licença na página do dataset no Kaggle.
 - [x] `PSP8_Analise_P1_P4.ipynb` executado com sucesso no Colab (relato do autor).
 - [ ] Capturar e versionar evidências legíveis em `evidencias/` (pasta do Drive no navegador, saídas do Colab, gráficos reais): lista exata em [`evidencias/LEIAME.md`](../evidencias/LEIAME.md).
-- [ ] Definir a licença do código (`LICENSE`), conferir o repositório em janela anônima e postar o link no fórum da disciplina. (O nome do aluno já consta no README.)
+- [x] Licença do código definida (`LICENSE`, MIT).
+- [ ] Conferir o repositório em janela anônima e postar o link no fórum da disciplina. (O nome do aluno já consta no README.)
 
 **Não mesclar esta branch na `main` antes da aprovação e validação das pendências.**
