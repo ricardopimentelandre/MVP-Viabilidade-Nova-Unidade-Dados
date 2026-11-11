@@ -11,7 +11,7 @@ Sistema de Suporte à Decisão (SSD) para **triagem preliminar** de um cenário 
 
 > **Aviso sobre o escopo dos dados.** A base usada reúne **projetos genéricos de infraestrutura (estradas, pontes, edifícios, usinas, obras hídricas)**. **Não é uma amostra específica de data centers.** Os resultados são comparações relativas a essa distribuição: **não são probabilidade de viabilidade, previsão de sucesso nem certificação financeira.** A decisão final permanece humana.
 
-**Estado da validação (leia antes dos resultados).** O **pipeline e o notebook de análise P1–P4 foram executados com sucesso no Google Colab** (relato do autor): coleta da versão 1, gravação de bronze e prata no Drive, Drive desmontado e remontado, 3.245 registros relidos, SHA-256 conferido e `Resultado: APROVADA`. Os números de P1–P4 abaixo foram calculados e conferidos **localmente sobre o mesmo CSV (mesmo SHA-256)**. Os **7 gráficos gerados pelo notebook no Colab estão anexados** em [`evidencias/graficos/`](evidencias/graficos/) e exibidos na seção 7; as **capturas de tela da interface do Colab e do Drive ainda não estão anexadas** (ver [Evidências](#10-evidências)).
+**Estado da validação (leia antes dos resultados).** O **pipeline e o notebook de análise P1–P4 foram executados com sucesso no Google Colab** (relato do autor): coleta da versão 1, gravação de bronze e prata no Drive, Drive desmontado e remontado, 3.245 registros relidos, SHA-256 conferido e `Resultado: APROVADA`. Os números de P1–P4 abaixo foram calculados e conferidos **localmente sobre o mesmo CSV (mesmo SHA-256)**. Os **7 gráficos gerados pelo notebook no Colab estão anexados** em [`evidencias/graficos/`](evidencias/graficos/) e exibidos na seção 7; as **capturas de tela do Colab e do Drive estão em [`evidencias/capturas/`](evidencias/capturas/)** (seção 10; falta apenas a captura 05, da pasta de execução no Drive).
 
 ## Sumário
 1. [Objetivo, problema e perguntas](#1-objetivo-problema-e-perguntas) · 2. [Fonte, licença e coleta](#2-fonte-licença-e-coleta) · 3. [Plataforma e arquitetura](#3-plataforma-e-arquitetura) · 4. [Modelagem e catálogo](#4-modelagem-e-catálogo) · 5. [ETL e carga](#5-etl-e-carga) · 6. [Qualidade dos dados](#6-qualidade-dos-dados) · 7. [Resultados P1–P4](#7-resultados-p1p4) · 8. [Discussão geral e limitações](#8-discussão-geral-e-limitações) · 9. [Como reproduzir](#9-como-reproduzir) · 10. [Evidências](#10-evidências) · 11. [Autoavaliação](#11-autoavaliação) · 12. [Estrutura do repositório](#12-estrutura-do-repositório)
@@ -46,12 +46,12 @@ Sistema de Suporte à Decisão (SSD) para **triagem preliminar** de um cenário 
 | Item | Registro |
 |---|---|
 | Base | *Engineering Project Cost Feasibility Dataset* — [`ziya07/engineering-project-cost-feasibility-dataset`](https://www.kaggle.com/datasets/ziya07/engineering-project-cost-feasibility-dataset) |
-| Versão | **1** ("Initial release", 2025-07-28); o pipeline fixa `versions/1` |
+| Versão | **1** ("Initial release", 2025-07-28); o pipeline solicita `versions/1`. No Colab o `kagglehub` serve o dataset a partir do cache local (`/kaggle/input/...`), cujo caminho não traz o número da versão; por isso `versao_kaggle_baixada` aparece como `None` no manifesto ([captura 03](evidencias/capturas/03_colab_resumo_manifesto.png)). A versão 1 é confirmada pelo SHA-256, igual ao da v1 documentada (`Hash confere com a v1 documentada: True`). |
 | **Licença** | **CC0: Public Domain**, que permite redistribuição e uso derivado. Fonte: API pública do Kaggle (consulta em 2026-11-11). *Reconfirme na página do dataset antes da entrega.* |
 | Formato original | CSV UTF-8, com cabeçalho; `Engineering_Cost_Feasibility_Dataset.csv` |
 | Volume | 3.245 registros × 13 colunas; 261.932 bytes |
 | SHA-256 | `a93b9f10f889c95145dc5bdae9894a42582bb04c51b3bd1817ef515ff5920dc6` (fonte = bronze = prata na execução do Colab) |
-| Data da coleta | Execução de referência em **2026-11-11** (manifesto `20261111T004425Z_bc476d5a`, 00:44:25 UTC). O campo `coletado_em_utc` das execuções posteriores consta em cada `manifesto_execucao.json`. |
+| Data da coleta | **2026-11-11**. Execução do pipeline usada nas capturas: `20261111T213507Z_0ef8b8d7`, com `coletado_em_utc` = 2026-11-11T21:35:07 UTC ([captura 03](evidencias/capturas/03_colab_resumo_manifesto.png)). A primeira execução (`20261111T004425Z_bc476d5a`, 00:44 UTC) antecede as correções do pipeline e não traz esse campo. |
 | Procedência | **Não documentada** pelo autor da base. Os dados podem ser sintéticos (hipótese sustentada por indícios em P1, não por documentação). |
 | Coleta | Via `kagglehub` (download oficial, sem *web scraping*). |
 
@@ -208,21 +208,46 @@ python -m unittest discover -s tests -v
 
 ## 10. Evidências
 
-Os arquivos JSON (manifesto, auditoria e verificação) são gerados pelo código e ficam no Drive em `execucoes/<id>/evidencias/`. **Nenhuma imagem de evidência foi simulada.** Os gráficos de P1–P4 são saídas reais do Colab, em [`evidencias/graficos/`](evidencias/graficos/); os resultados numéricos (CSVs do mesmo `analises/`) foram conferidos e coincidem com o cálculo independente, com diferença relativa máxima de ~1e-14. As capturas da interface do Colab e do Drive ainda devem ser salvas em [`evidencias/`](evidencias/LEIAME.md), que traz a lista exata e os nomes de arquivo.
+Os JSONs (manifesto, auditoria e verificação) são gerados pelo código e ficam no Drive em `execucoes/<id>/evidencias/`. **Nenhuma evidência foi simulada**: as capturas abaixo são da execução real no Colab e no Drive, e os gráficos de P1–P4 são saídas reais do notebook ([`evidencias/graficos/`](evidencias/graficos/)). Os CSVs do mesmo `analises/` foram conferidos e coincidem com o cálculo independente (diferença relativa máxima de ~1e-14).
 
-| Evidência | Situação |
-|---|---|
-| Pipeline executado no Colab: 3.245 registros relidos, SHA-256 de fonte, bronze e prata iguais a `a93b9f10…`, `Resultado: APROVADA` | **Executado e confirmado pelo autor.** Manifesto e auditoria da primeira execução (`20261111T004425Z_bc476d5a`) conferidos nos JSONs; **captura da interface: pendente** |
-| Drive desmontado e remontado antes da releitura | **Executado e confirmado pelo autor;** captura da célula: pendente |
-| Notebook de análise P1–P4 executado no Colab | **Executado.** Gráficos reais anexados em `evidencias/graficos/` (7 arquivos, seção 7); **captura da interface com a carga da prata: pendente** |
-| Pasta `execucoes/<id>/` no Drive, com `bronze/`, `prata/`, `evidencias/` e `analises/` | **Pendente** (captura no navegador) |
-| Repositório aberto em janela anônima | **Pendente** (o repositório responde como público na API do GitHub) |
+### Execuções registradas no Drive
 
-**Pendências efetivas:** (1) anexar as 8 capturas de tela listadas em [`evidencias/LEIAME.md`](evidencias/LEIAME.md) (4 do Colab e 4 do navegador); (2) reconfirmar a licença CC0 na página do dataset; (3) conferir o repositório em janela anônima e postar o link no fórum da disciplina.
+| Execução (`execucoes/<id>/`) | Papel | Observação |
+|---|---|---|
+| `20261111T004425Z_bc476d5a` | Primeira execução do pipeline | Anterior às correções (sem `coletado_em_utc`, sem verificação de persistência) |
+| `20261111T195017Z_c1039983` | **Camada prata usada na análise P1–P4** | Carregada pelo notebook de análise ([captura 04](evidencias/capturas/04_colab_analise_carga_prata.png)) |
+| `20261111T213507Z_0ef8b8d7` | **Execução do pipeline usada nas capturas 01, 02, 03 e 06** | Coleta às 21:35:07 UTC, verificação `APROVADA` |
+
+As execuções são independentes, mas os **hashes coincidem**: a prata usada em P1–P4 e a da execução capturada têm o mesmo SHA-256, `a93b9f10f889c95145dc5bdae9894a42582bb04c51b3bd1817ef515ff5920dc6`, igual ao do CSV da v1.
+
+### Capturas
+
+| # | Evidência | Arquivo |
+|---|---|---|
+| 01 | Pipeline executado: `VALIDAÇÃO CONCLUÍDA`, 3.245 linhas × 13 colunas, SHA-256 de bronze e prata iguais, **0 violações do domínio** | [`01_colab_pipeline_executado.png`](evidencias/capturas/01_colab_pipeline_executado.png) |
+| 02 | Drive **desmontado (flush), remontado** e `PERSISTÊNCIA VERIFICADA`, `Resultado: APROVADA` | [`02_colab_remontagem_verificacao.png`](evidencias/capturas/02_colab_remontagem_verificacao.png) |
+| 03 | Manifesto: licença **CC0: Public Domain**, `coletado_em_utc`, os três SHA-256, `Prata idêntica à bronze: True`, `Hash confere com a v1 documentada: True`, 0 violações, 0 *outliers* | [`03_colab_resumo_manifesto.png`](evidencias/capturas/03_colab_resumo_manifesto.png) |
+| 04 | Notebook P1–P4 carregando a prata do Drive: execução `20261111T195017Z_c1039983`, 3.245 / 13, SHA-256 idêntico à v1 | [`04_colab_analise_carga_prata.png`](evidencias/capturas/04_colab_analise_carga_prata.png) |
+| 05 | Pasta da execução no Drive, com `bronze/`, `prata/` e `evidencias/` | **Pendente** |
+| 06 | Pasta `evidencias/` da execução `20261111T213507Z_0ef8b8d7` no Drive, com os três JSONs (`verificacao_persistencia`, `manifesto_execucao`, `auditoria_qualidade`) | [`06_drive_evidencias_json.png`](evidencias/capturas/06_drive_evidencias_json.png) |
+
+![01 — Pipeline executado](evidencias/capturas/01_colab_pipeline_executado.png)
+
+![02 — Drive remontado e persistência aprovada](evidencias/capturas/02_colab_remontagem_verificacao.png)
+
+![03 — Manifesto, licença e hashes](evidencias/capturas/03_colab_resumo_manifesto.png)
+
+![04 — Notebook P1–P4 carregando a prata](evidencias/capturas/04_colab_analise_carga_prata.png)
+
+![06 — Os três JSONs no Drive](evidencias/capturas/06_drive_evidencias_json.png)
+
+**Repositório público:** a visibilidade foi conferida pelo autor em janela anônima (a captura não será publicada).
+
+**Pendências efetivas:** (1) captura 05 (pasta da execução no Drive); (2) reconfirmar a licença CC0 na página do dataset; (3) postar o link do repositório no fórum da disciplina.
 
 ## 11. Autoavaliação
 
-**Quais perguntas foram respondidas e quais não foram? Por quê?** As quatro foram **respondidas tecnicamente** (P1–P4, seção 7), com as ressalvas de que as respostas são **descritivas e heurísticas**: P2 e P3 posicionam o cenário em relação ao histórico, mas **não** estimam probabilidade de viabilidade; P4 mostra a sensibilidade do índice, mas **não** indica qual alavanca priorizar. A hipótese foi apenas **parcialmente sustentada**: o índice distingue cenários, mas não reproduz o rótulo de viabilidade da base. O pipeline e o notebook P1–P4 foram executados no Colab; as capturas da execução ainda precisam ser anexadas ao repositório.
+**Quais perguntas foram respondidas e quais não foram? Por quê?** As quatro foram **respondidas tecnicamente** (P1–P4, seção 7), com as ressalvas de que as respostas são **descritivas e heurísticas**: P2 e P3 posicionam o cenário em relação ao histórico, mas **não** estimam probabilidade de viabilidade; P4 mostra a sensibilidade do índice, mas **não** indica qual alavanca priorizar. A hipótese foi apenas **parcialmente sustentada**: o índice distingue cenários, mas não reproduz o rótulo de viabilidade da base. O pipeline e o notebook P1–P4 foram executados no Colab; as capturas e os gráficos da execução estão anexados (resta uma captura do Drive, a 05).
 
 **Que limitações dos dados condicionaram os resultados?** Projetos genéricos de infraestrutura (não data centers); procedência não documentada e indícios de dado sintético (distribuições planas e ausência de correlação linear relevante entre as dimensões), o que torna o índice quase simétrico; ausência de dicionário de dados (sentido do risco, escalas e unidades são premissas); rótulo de viabilidade sem critério documentado; ausência de dimensão temporal.
 
@@ -244,7 +269,7 @@ Os arquivos JSON (manifesto, auditoria e verificação) são gerados pelo códig
 | `tests/` | Testes automatizados (dados sintéticos com linhas reais; testes opcionais com o CSV real) |
 | `catalogo/catalogo_dados.md` | Catálogo de dados, modelo e linhagem |
 | `docs/` | Planejamento aprovado e instruções de execução da Etapa 2 (parcialmente desatualizadas em relação a este README) |
-| `evidencias/` | Capturas de tela e gráficos da execução no Colab/Drive ([lista do que falta](evidencias/LEIAME.md)) |
+| `evidencias/` | `capturas/` (5 capturas de tela do Colab e do Drive), `graficos/` (7 gráficos de P1–P4) e [`LEIAME.md`](evidencias/LEIAME.md) |
 | `.gitignore` | Exclui dados, credenciais, ambientes virtuais e arquivos locais |
 
 **Licença.** Código: **MIT** (© 2026 Ricardo Pimentel André), em [`LICENSE`](LICENSE). Dados: **CC0** (Kaggle, versão 1); os dados não fazem parte do repositório e não são cobertos pela licença MIT.

@@ -1,47 +1,31 @@
 # Evidências da execução em nuvem
 
-Esta pasta guarda as **capturas de tela e os gráficos reais** que comprovam a execução no Google Colab e a persistência no Google Drive (enunciado §5.2). As imagens devem estar **legíveis** e ser **referenciadas no README**, no ponto que sustentam.
-
-**Situação em 11/11/2026:** os **7 gráficos reais do notebook P1–P4** (saídas do Colab, baixadas do Drive) estão em [`graficos/`](graficos/) e já aparecem no README (seção 7). **Ainda faltam as 8 capturas de tela da interface** (4 do Colab e 4 do navegador), listadas abaixo. Nada aqui foi simulado: não há imagens geradas fora do Colab/Drive passando por evidência.
+Esta pasta guarda as **capturas de tela e os gráficos reais** que comprovam a execução no Google Colab e a persistência no Google Drive (enunciado §5.2). Tudo aqui é da execução real; **nada foi simulado**. As imagens são referenciadas no README (seções 7 e 10).
 
 ## Já anexado
 
-| Arquivo (`graficos/`) | Mostra | README |
+### Capturas de tela (`capturas/`)
+
+Execução do pipeline: `20261111T213507Z_0ef8b8d7`. Execução cuja prata foi usada em P1–P4: `20261111T195017Z_c1039983`. Os dois SHA-256 coincidem (`a93b9f10f889c95145dc5bdae9894a42582bb04c51b3bd1817ef515ff5920dc6`).
+
+| Arquivo | Mostra | Execução |
 |---|---|---|
-| `p1_histogramas.png` | P1: distribuições de custo, risco e prazo | §7, P1 |
-| `p2_percentis_do_cenario.png` | P2: posição do cenário (percentis 75,7 / 72,3 / 75,1) | §7, P2 |
-| `p3_indice_do_cenario.png` | P3: índice 74,4 e faixa Crítica | §7, P3 |
-| `p3_indice_historico.png` | P3: índice dos projetos históricos × cenário | §7, P3 |
-| `p4_comparacao_de_cenarios.png` | P4: índice por cenário | §7, P4 |
-| `p4_sensibilidade_percentual.png` | P4: uma dimensão por vez | §7, P4 |
-| `p4_curvas_por_dimensao.png` | P4: índice × valor de cada dimensão | §7, P4 |
+| `01_colab_pipeline_executado.png` | `VALIDAÇÃO CONCLUÍDA`, 3.245 × 13, SHA-256 de bronze e prata, 0 violações do domínio | `…213507Z_0ef8b8d7` |
+| `02_colab_remontagem_verificacao.png` | Drive desmontado (flush), remontado e `Resultado: APROVADA` | `…213507Z_0ef8b8d7` |
+| `03_colab_resumo_manifesto.png` | licença CC0, `coletado_em_utc`, três SHA-256, prata idêntica à bronze, hash igual ao da v1 | `…213507Z_0ef8b8d7` |
+| `04_colab_analise_carga_prata.png` | notebook P1–P4 carregando a prata (3.245 / 13, SHA-256 idêntico à v1) | `…195017Z_c1039983` |
+| `06_drive_evidencias_json.png` | pasta `evidencias/` no Drive com os três JSONs | `…213507Z_0ef8b8d7` |
+
+Observação sobre a captura 03: `versão baixada: None`. No Colab o `kagglehub` usa o cache local (`/kaggle/input/...`), cujo caminho não traz o número da versão; a versão 1 foi solicitada e é confirmada pelo hash (`Hash confere com a v1 documentada: True`).
+
+### Gráficos de P1–P4 (`graficos/`)
+
+`p1_histogramas.png` · `p2_percentis_do_cenario.png` · `p3_indice_do_cenario.png` · `p3_indice_historico.png` · `p4_comparacao_de_cenarios.png` · `p4_sensibilidade_percentual.png` · `p4_curvas_por_dimensao.png` (saídas do notebook `PSP8_Analise_P1_P4`, baixadas de `execucoes/<id>/analises/`).
 
 Observação sobre `p3_indice_do_cenario.png`: a legenda cobre o rótulo "74,4" da barra "Índice geral" (o valor consta no título do gráfico e no README). É um detalhe visual do notebook, mantido sem alteração para que a imagem corresponda ao código executado.
 
-## O que ainda falta fornecer (8 capturas de tela)
+## O que ainda falta
 
-**A. Capturas da interface do Colab** (tirar da execução já feita, sem reexecutar; se a sessão expirou, reexecute e capture)
+**Captura 05** (única pendente): `05_drive_pasta_execucao.png`, salva em `capturas/`. Deve mostrar, no navegador, a pasta `MyDrive/UnB/PSP8/MVP_Viabilidade_Nova_Unidade/execucoes/20261111T213507Z_0ef8b8d7/` com as subpastas `bronze/`, `prata/` e `evidencias/` visíveis e o caminho na barra de navegação. Depois de salva, no README (seção 10) troque "Pendente" da linha 05 pelo link do arquivo e, se quiser, embuta a imagem com `![05 — Pasta da execução no Drive](evidencias/capturas/05_drive_pasta_execucao.png)`.
 
-| Arquivo sugerido | O que deve aparecer | Notebook / célula |
-|---|---|---|
-| `01_colab_pipeline_executado.png` | `VALIDAÇÃO CONCLUÍDA`, `linhas=3245 / colunas=13`, SHA-256 de bronze e prata, `Violações do domínio esperado: 0` | `PSP8_Pipeline_Bronze_Prata_Colab`, célula do `executar_pipeline` |
-| `02_colab_remontagem_verificacao.png` | desmontagem (`Drive desmontado`), remontagem e `PERSISTÊNCIA VERIFICADA … Resultado: APROVADA` | mesmo notebook, células da seção 3 |
-| `03_colab_resumo_manifesto.png` | licença `CC0: Public Domain`, versão, `coletado_em_utc`, os três SHA-256 e `Prata idêntica à bronze: True` | mesmo notebook, célula de resumo |
-| `04_colab_analise_carga_prata.png` | execução usada, 3.245 registros, SHA-256 da prata, `Idêntica à v1 do Kaggle: True` | `PSP8_Analise_P1_P4`, célula de preparação |
-
-**B. Capturas do Google Drive no navegador** (não podem ser substituídas por JSON)
-
-| Arquivo sugerido | O que deve aparecer |
-|---|---|
-| `05_drive_pasta_execucao.png` | `MyDrive/UnB/PSP8/MVP_Viabilidade_Nova_Unidade/execucoes/<id>/` com `bronze/`, `prata/`, `evidencias/` e `analises/` visíveis, com o caminho na barra |
-| `06_drive_evidencias_json.png` | pasta `evidencias/` com `manifesto_execucao.json`, `auditoria_qualidade.json` e `verificacao_persistencia.json` |
-| `07_drive_analises.png` | pasta `analises/` com os PNGs e CSVs de P1–P4 |
-| `08_repositorio_janela_anonima.png` | o repositório do GitHub aberto em janela anônima |
-
-**C. Opcional:** os três JSONs da execução final, em `evidencias/json/`.
-
-Não publique credenciais, tokens, e-mails nem dados privados nas capturas.
-
-## Como referenciar as capturas no README
-
-Depois de salvar os arquivos nesta pasta, na seção 10 do README troque "pendente" pelo nome do arquivo correspondente (por exemplo, `evidencias/05_drive_pasta_execucao.png`) e, se quiser, embuta a imagem com `![descrição](evidencias/05_drive_pasta_execucao.png)`.
+Não publique credenciais, tokens, e-mails, abas, favoritos nem dados privados nas capturas (recorte a janela do navegador, se necessário). A visibilidade pública do repositório foi conferida pelo autor em janela anônima; essa captura não será publicada.

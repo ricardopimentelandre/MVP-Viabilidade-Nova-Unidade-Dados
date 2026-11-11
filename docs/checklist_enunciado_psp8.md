@@ -8,15 +8,15 @@ Situação em 11/11/2026. **Atendido** = comprovado no repositório; **Atendido,
 |---|---|---|---|
 | 1 | Objetivo e perguntas de negócio documentados e íntegros, inclusive os não atingidos | **Atendido** (P1–P4 íntegras; hipótese e critério de refutação) | README §1; `docs/planejamento_psp8.md` |
 | 2 | Origem, licença e data de coleta registradas | **Atendido** (Kaggle v1, CC0, execução de 11/11/2026). *Reconfirmar a licença na página do dataset* | README §2; manifesto; catálogo §1 |
-| 3 | Dados efetivamente persistidos na nuvem | **Atendido, falta evidência**: pipeline executado no Colab com Drive remontado e `APROVADA`; **faltam capturas da interface do Drive** | README §5 e §10; `evidencias/LEIAME.md` (itens A e B) |
+| 3 | Dados efetivamente persistidos na nuvem | **Atendido**: pipeline executado no Colab com Drive desmontado/remontado e `APROVADA` (capturas 01, 02, 03) e os três JSONs no Drive (captura 06). Falta só a captura 05 (pasta da execução com `bronze/` e `prata/`) | README §5 e §10; `evidencias/capturas/` |
 | 4 | Modelo descrito e Catálogo com domínios e linhagem | **Atendido** (13 atributos, tipo, descrição, domínio, obrigatoriedade, linhagem, diagramas) | `catalogo/catalogo_dados.md` |
 | 5 | Transformação e carga documentadas, com regras de negócio explícitas | **Atendido** (nenhuma transformação de conteúdo, declarada; prata idêntica à bronze) | README §5; manifesto `transformacoes_prata` |
 | 6 | Análise de qualidade cobre todos os atributos | **Atendido** (13 atributos × completude, unicidade, conformidade, consistência, acurácia, atualidade) | README §6; `auditoria_qualidade.json` |
 | 7 | Cada pergunta com resposta, evidência e discussão | **Atendido**: P1–P4 respondidas no README e no notebook; **7 gráficos reais do Colab anexados** em `evidencias/graficos/` e referenciados na seção 7 | README §7; `notebooks/PSP8_Analise_P1_P4.ipynb`; `evidencias/graficos/` |
 | 8 | Discussão geral conectando as respostas ao problema | **Atendido** | README §8; notebook (discussão geral) |
 | 9 | Autoavaliação com as 4 questões sugeridas (§6) | **Atendido** | README §11 |
-| 10 | Evidências (capturas e vídeos) legíveis e referenciadas | **Parcial**: gráficos de P1–P4 anexados e referenciados; **faltam 8 capturas de tela da interface do Colab e do Drive** (lista exata em `evidencias/LEIAME.md`) | `evidencias/` |
-| 11 | Repositório público, link conferido em janela anônima | **Parcial**: a API do GitHub responde `private: false`; **falta a conferência em janela anônima** | — |
+| 10 | Evidências (capturas e vídeos) legíveis e referenciadas | **Quase completo**: 5 capturas (01–04 e 06) e 7 gráficos anexados e referenciados no README; **falta a captura 05** (pasta da execução no Drive) | `evidencias/capturas/`, `evidencias/graficos/` |
+| 11 | Repositório público, link conferido em janela anônima | **Atendido**: conferido pelo autor em janela anônima (captura não publicada) e `private: false` na API do GitHub. Falta postar o link no fórum | — |
 
 ## Demais requisitos do enunciado
 
@@ -41,7 +41,7 @@ Situação em 11/11/2026. **Atendido** = comprovado no repositório; **Atendido,
 | Objetivo | 1,0 | Completo |
 | Coleta | 0,5 | Completo (reconfirmar licença na página) |
 | Modelagem (modelo + catálogo) | 2,0 | Completo |
-| Carga | 1,0 | Completa no código e no Colab; **evidência visual da persistência pendente** |
+| Carga | 1,0 | Completa; persistência comprovada nas capturas 01–03 e 06 (falta só a 05) |
 | Análise (qualidade, solução, discussão) | 3,0 | Completa, com gráficos reais anexados |
 | Autoavaliação | 0,5 | Completa |
-| Capricho | 2,0 | README e repositório organizados, gráficos anexados; **capturas de tela** ajudam a pontuação |
+| Capricho | 2,0 | README e repositório organizados, gráficos anexados; a **captura 05** completa as evidências |
